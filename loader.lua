@@ -4,7 +4,7 @@ local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
 -- =====================================================
-local correctKey = "TU_KEY_SECRETA" -- Pon tu key aquí
+local correctKey = "TU_KEY_SECRETA" -- Pon tu key
 -- =====================================================
 
 if player.PlayerGui:FindFirstChild("FruitSteel") then
@@ -16,33 +16,32 @@ ScreenGui.Name = "FruitSteel"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = player:WaitForChild("PlayerGui")
 
--- Frame principal sólido (azul oscuro fuerte, sin transparencia)
 local Main = Instance.new("Frame")
 Main.Size = UDim2.new(0, 440, 0, 320)
 Main.Position = UDim2.new(0.5, -220, 0.5, -160)
 Main.BackgroundColor3 = Color3.fromRGB(20, 30, 55)
-Main.BackgroundTransparency = 0  -- Fondo fuerte y opaco
+Main.BackgroundTransparency = 0  -- Fondo sólido, nada transparente
 Main.Parent = ScreenGui
 Main.Active = true
 Instance.new("UICorner", Main).CornerRadius = UDim.new(0, 20)
 
--- Bordes dorados (amarillo dorado brillante, sin RGB)
-local GoldStroke = Instance.new("UIStroke")
-GoldStroke.Thickness = 6  -- grueso para que se vea bien
-GoldStroke.Color = Color3.fromRGB(255, 215, 0)  -- dorado/amariilo fuerte
-GoldStroke.Transparency = 0
-GoldStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-GoldStroke.Parent = Main
+-- Marco amarillo (amariilo) grueso y visible
+local YellowStroke = Instance.new("UIStroke")
+YellowStroke.Thickness = 6  -- bien grueso para que se note
+YellowStroke.Color = Color3.fromRGB(255, 215, 0)  -- amarillo dorado/amariilo brillante
+YellowStroke.Transparency = 0
+YellowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+YellowStroke.Parent = Main
 
--- Fondo: chica anime neko bonita (fuerte, sin transparencia)
+-- Fondo: chica anime neko bonita (sin transparencia)
 local BackgroundImage = Instance.new("ImageLabel")
 BackgroundImage.Name = "NekoBackground"
 BackgroundImage.Size = UDim2.new(1, 0, 1, 0)
 BackgroundImage.Position = UDim2.new(0, 0, 0, 0)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.Image = "rbxassetid://434150986"  -- neko cute pelo blanco, orejas, kawaii
-BackgroundImage.ImageTransparency = 0  -- 0 = completamente opaca y fuerte, se ve clarita
-BackgroundImage.ScaleType = Enum.ScaleType.Crop  -- o .Fit si se ve mejor así
+BackgroundImage.Image = "rbxassetid://434150986"  -- neko anime cute pelo blanco
+BackgroundImage.ImageTransparency = 0  -- 0 = completamente opaca, se ve clarita
+BackgroundImage.ScaleType = Enum.ScaleType.Crop  -- o .Fit si prefieres sin corte
 BackgroundImage.ZIndex = 0
 BackgroundImage.Parent = Main
 
