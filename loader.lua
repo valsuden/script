@@ -99,7 +99,7 @@ local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1, 0, 0, 50)
 Title.BackgroundTransparency = 1
 Title.ZIndex = 5
-Title.Text = "FRUIT STEEL"
+Title.Text = "FRUIT STEEL V2"
 Title.Font = Enum.Font.GothamBlack
 Title.TextScaled = true
 Title.TextColor3 = Color3.fromRGB(0, 170, 255)
@@ -185,15 +185,93 @@ ResultLabel.TextColor3 = Color3.new(1, 1, 1)
 ResultLabel.Parent = Main
 
 Submit.MouseButton1Click:Connect(function()
-    local enteredKey = KeyBox.Text:gsub("^%s+", ""):gsub("%s+$", "")
+
+    local enteredKey = KeyBox.Text:match("^%s*(.-)%s*$")
+
     if enteredKey == correctKey then
+
         ResultLabel.Text = "✅ Correct key"
         ResultLabel.TextColor3 = Color3.fromRGB(0, 255, 100)
+
+        wait(2)
+        Main:Destroy()
+
+        -- =========================
+        -- SEGUNDA GUI MORADA
+        -- =========================
+
+        local Second = Instance.new("Frame")
+        Second.Size = UDim2.new(0, 420, 0, 260)
+        Second.Position = UDim2.new(0.5, -210, 0.5, -130)
+        Second.BackgroundColor3 = Color3.fromRGB(45, 0, 70)
+        Second.Parent = ScreenGui
+        Second.Active = true
+        Instance.new("UICorner", Second).CornerRadius = UDim.new(0, 20)
+
+        local Stroke = Instance.new("UIStroke")
+        Stroke.Color = Color3.fromRGB(200, 0, 255)
+        Stroke.Thickness = 4
+        Stroke.Parent = Second
+
+        local Title2 = Instance.new("TextLabel")
+        Title2.Size = UDim2.new(1, 0, 0, 50)
+        Title2.BackgroundTransparency = 1
+        Title2.Text = "FRUIT STEEL PANEL"
+        Title2.Font = Enum.Font.GothamBlack
+        Title2.TextScaled = true
+        Title2.TextColor3 = Color3.fromRGB(210, 120, 255)
+        Title2.Parent = Second
+
+        local button1Name = "Action One"
+        local button2Name = "Action Two"
+
+        local function createButton(name, posY)
+
+            local Btn = Instance.new("TextButton")
+            Btn.Size = UDim2.new(0, 250, 0, 45)
+            Btn.Position = UDim2.new(0.5, -125, 0, posY)
+            Btn.BackgroundColor3 = Color3.fromRGB(120, 0, 180)
+            Btn.Text = name
+            Btn.Font = Enum.Font.GothamBold
+            Btn.TextScaled = true
+            Btn.TextColor3 = Color3.new(1,1,1)
+            Btn.Parent = Second
+            Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 15)
+
+            local busy = false
+
+            Btn.MouseButton1Click:Connect(function()
+                if busy then return end
+                busy = true
+
+                local originalText = name
+
+                for i = 5, 1, -1 do
+                    Btn.Text = originalText .. " ("..i..")"
+                    wait(1)
+                end
+
+                Btn.Text = "Successfully"
+                Btn.BackgroundColor3 = Color3.fromRGB(0, 200, 140)
+
+                wait(2)
+
+                Btn.Text = originalText
+                Btn.BackgroundColor3 = Color3.fromRGB(120, 0, 180)
+                busy = false
+            end)
+        end
+
+        createButton(button1Name, 80)
+        createButton(button2Name, 140)
+
     else
+
         ResultLabel.Text = "❌ Incorrect key"
         ResultLabel.TextColor3 = Color3.fromRGB(255, 80, 80)
+
     end
-end)
+end)   
 
 -- Footer
 local Footer = Instance.new("TextLabel")
