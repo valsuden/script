@@ -4,7 +4,7 @@ local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
 -- =====================================================
-local correctKey = "key_hack" -- Pon tu key aquí
+local correctKey = "key_blox2026" -- Pon tu key aquí
 -- =====================================================
 
 if player.PlayerGui:FindFirstChild("FruitSteel") then
