@@ -4,7 +4,7 @@ local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
 -- =====================================================
-local correctKey = "TU_KEY_SECRETA" -- Pon tu key aquí
+local correctKey = "key_hack" -- Pon tu key aquí
 -- =====================================================
 
 if player.PlayerGui:FindFirstChild("FruitSteel") then
@@ -126,7 +126,7 @@ Button.MouseLeave:Connect(function()
 end)
 
 Button.MouseButton1Click:Connect(function()
-    local discordLink = "https://discord.gg/TU_LINK_AQUI"
+    local discordLink = "https://discord.gg/8hSAwwz86j"
     pcall(function()
         setclipboard(discordLink)
     end)
