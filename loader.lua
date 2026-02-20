@@ -1,53 +1,51 @@
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local TweenService = game:GetService("TweenService")
-local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
+
 -- =====================================================
--- CAMBIA ESTA KEY POR LA QUE QUIERAS (la correcta)
+local correctKey = "TU_KEY_SECRETA" -- Pon tu key
 -- =====================================================
-local correctKey = "TU_KEY_SECRETA" -- <-- Pon aquí tu key
--- =====================================================
--- Evitar duplicación
+
 if player.PlayerGui:FindFirstChild("FruitSteel") then
     player.PlayerGui.FruitSteel:Destroy()
 end
--- ScreenGui
+
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "FruitSteel"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = player:WaitForChild("PlayerGui")
--- Frame principal (azul oscuro sólido, sin transparencia)
+
 local Main = Instance.new("Frame")
 Main.Size = UDim2.new(0, 440, 0, 320)
 Main.Position = UDim2.new(0.5, -220, 0.5, -160)
 Main.BackgroundColor3 = Color3.fromRGB(20, 30, 55)
-Main.BackgroundTransparency = 0  -- Fondo sólido, no transparente
+Main.BackgroundTransparency = 0  -- Fondo sólido, nada transparente
 Main.Parent = ScreenGui
 Main.Active = true
 Instance.new("UICorner", Main).CornerRadius = UDim.new(0, 20)
 
--- Marco amarillo brillante (amariilo)
+-- Marco amarillo (amariilo) grueso y visible
 local YellowStroke = Instance.new("UIStroke")
-YellowStroke.Thickness = 5  -- grueso para que se vea bien
-YellowStroke.Color = Color3.fromRGB(255, 215, 0)  -- amarillo dorado/amariilo
+YellowStroke.Thickness = 6  -- bien grueso para que se note
+YellowStroke.Color = Color3.fromRGB(255, 215, 0)  -- amarillo dorado/amariilo brillante
 YellowStroke.Transparency = 0
 YellowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 YellowStroke.Parent = Main
 
--- Fondo: chica anime neko bonita (carga en Delta)
+-- Fondo: chica anime neko bonita (sin transparencia)
 local BackgroundImage = Instance.new("ImageLabel")
 BackgroundImage.Name = "NekoBackground"
 BackgroundImage.Size = UDim2.new(1, 0, 1, 0)
 BackgroundImage.Position = UDim2.new(0, 0, 0, 0)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.Image = "rbxassetid://434150986"  -- neko cute pelo blanco kawaii
-BackgroundImage.ImageTransparency = 0.35  -- ajusta si quieres más/menos visible
-BackgroundImage.ScaleType = Enum.ScaleType.Crop
+BackgroundImage.Image = "rbxassetid://434150986"  -- neko anime cute pelo blanco
+BackgroundImage.ImageTransparency = 0  -- 0 = completamente opaca, se ve clarita
+BackgroundImage.ScaleType = Enum.ScaleType.Crop  -- o .Fit si prefieres sin corte
 BackgroundImage.ZIndex = 0
 BackgroundImage.Parent = Main
 
--- Sistema de arrastre (igual)
+-- Sistema de arrastre
 local dragging, dragInput, dragStart, startPos
 local function update(input)
     local delta = input.Position - dragStart
