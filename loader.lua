@@ -33,7 +33,7 @@ BackgroundImage.Name = "NekoBackground"
 BackgroundImage.Size = UDim2.new(1, 0, 1, 0)
 BackgroundImage.Position = UDim2.new(0, 0, 0, 0)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.Image = "rbxassetid://434150986"  -- neko cute pelo blanco, orejas, kawaii – ahora sí aparece
+BackgroundImage.Image = "rbxassetid://122255224861955"  -- neko cute pelo blanco, orejas, kawaii – ahora sí aparece
 BackgroundImage.ImageTransparency = 0.35  -- ajusta: 0.2 = más visible la chica, 0.5 = más tenue para texto
 BackgroundImage.ScaleType = Enum.ScaleType.Crop  -- o prueba .Fit si se ve cortada raro
 BackgroundImage.ZIndex = 0  -- detrás de todo
