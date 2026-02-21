@@ -1,4 +1,4 @@
-Players = game:GetService("Players")
+local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 local correctKey = "key_blox2026"
@@ -70,12 +70,17 @@ local StrokeMain = Instance.new("UIStroke")
 StrokeMain.Color = Color3.fromRGB(255,200,0)
 StrokeMain.Thickness = 5
 StrokeMain.Parent = Main
--- Imagen de fondo
+-- Imagen de fondo ARREGLADA ✅ (tu mona china anime)
 local BackgroundImage = Instance.new("ImageLabel")
+BackgroundImage.Name = "MonaChinaBackground"
 BackgroundImage.Size = UDim2.new(1,0,1,0)
+BackgroundImage.Position = UDim2.new(0,0,0,0)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.Image = "rbxassetid://113824786988245"
+BackgroundImage.ImageTransparency = 0  -- ← Esto asegura visibilidad
+BackgroundImage.Image = "rbxassetid://96939198021601"  -- ← TU ID PERFECTO
 BackgroundImage.ScaleType = Enum.ScaleType.Crop
+BackgroundImage.ResampleMode = Enum.ResamplerMode.Pixelated  -- Mejor calidad anime
+BackgroundImage.ZIndex = 0  -- ← ATRÁS de todo (textos/botones encima)
 BackgroundImage.Parent = Main
 -- Título
 local Title = Instance.new("TextLabel")
