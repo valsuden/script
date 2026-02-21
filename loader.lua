@@ -160,95 +160,109 @@ Submit.MouseButton1Click:Connect(function()
 		Main.Visible = false
 
 		-- =========================
-		-- SECOND WINDOW
-		-- =========================
-		local Second = Instance.new("Frame")
-		Second.Size = UDim2.new(0, 420, 0, 260)
-		Second.Position = UDim2.new(0.5, -210, 0.5, -130)
-		Second.BackgroundColor3 = Color3.fromRGB(45,0,70)
-		Second.Parent = ScreenGui
-		Second.Active = true
-		Instance.new("UICorner", Second).CornerRadius = UDim.new(0,20)
+-- SECOND WINDOW PANEL PRO
+-- =========================
 
-		makeDraggable(Second)
+local Second = Instance.new("Frame")
+Second.Size = UDim2.new(0, 500, 0, 320)
+Second.Position = UDim2.new(0.5, -250, 0.5, -160)
+Second.BackgroundColor3 = Color3.fromRGB(60, 0, 80)
+Second.Parent = ScreenGui
+Second.Active = true
+Instance.new("UICorner", Second).CornerRadius = UDim.new(0,25)
 
-		local Stroke = Instance.new("UIStroke")
-		Stroke.Color = Color3.fromRGB(200,0,255)
-		Stroke.Thickness = 4
-		Stroke.Parent = Second
+makeDraggable(Second)
 
-		-- Close Second
-		local Close2 = Instance.new("TextButton")
-		Close2.Size = UDim2.new(0,30,0,30)
-		Close2.Position = UDim2.new(1,-40,0,10)
-		Close2.Text = "X"
-		Close2.Font = Enum.Font.GothamBold
-		Close2.TextScaled = true
-		Close2.BackgroundColor3 = Color3.fromRGB(180,60,60)
-		Close2.TextColor3 = Color3.new(1,1,1)
-		Close2.Parent = Second
-		Instance.new("UICorner", Close2).CornerRadius = UDim.new(1,0)
+local Stroke = Instance.new("UIStroke")
+Stroke.Color = Color3.fromRGB(200, 0, 255)
+Stroke.Thickness = 5
+Stroke.Parent = Second
 
-		Close2.MouseButton1Click:Connect(function()
-			Second:Destroy()
-			Main.Visible = true
-		end)
+-- Close Button
+local Close2 = Instance.new("TextButton")
+Close2.Size = UDim2.new(0,35,0,35)
+Close2.Position = UDim2.new(1,-45,0,10)
+Close2.Text = "X"
+Close2.Font = Enum.Font.GothamBold
+Close2.TextScaled = true
+Close2.BackgroundColor3 = Color3.fromRGB(180,60,60)
+Close2.TextColor3 = Color3.new(1,1,1)
+Close2.Parent = Second
+Instance.new("UICorner", Close2).CornerRadius = UDim.new(1,0)
 
-		-- Title Second
-		local SecondTitle = Instance.new("TextLabel")
-		SecondTitle.Size = UDim2.new(1, 0, 0, 50)
-		SecondTitle.BackgroundTransparency = 1
-		SecondTitle.Text = "FRUIT STEEL PANEL"
-		SecondTitle.Font = Enum.Font.GothamBlack
-		SecondTitle.TextScaled = true
-		SecondTitle.TextColor3 = Color3.fromRGB(255,255,255)
-		SecondTitle.Parent = Second
+Close2.MouseButton1Click:Connect(function()
+	Second:Destroy()
+	Main.Visible = true
+end)
 
-		-- Status Label
-		local Status = Instance.new("TextLabel")
-		Status.Size = UDim2.new(1, 0, 0, 40)
-		Status.Position = UDim2.new(0,0,0,60)
-		Status.BackgroundTransparency = 1
-		Status.Text = "Selecciona una opción"
-		Status.Font = Enum.Font.GothamBold
-		Status.TextScaled = true
-		Status.TextColor3 = Color3.fromRGB(200,200,200)
-		Status.Parent = Second
+-- Title
+local SecondTitle = Instance.new("TextLabel")
+SecondTitle.Size = UDim2.new(1,0,0,70)
+SecondTitle.BackgroundTransparency = 1
+SecondTitle.Text = "FRUIT STEEL PANEL"
+SecondTitle.Font = Enum.Font.GothamBlack
+SecondTitle.TextScaled = true
+SecondTitle.TextColor3 = Color3.fromRGB(255,150,255)
+SecondTitle.Parent = Second
 
-		-- Button 1
-		local Button1 = Instance.new("TextButton")
-		Button1.Size = UDim2.new(0, 150, 0, 40)
-		Button1.Position = UDim2.new(0.5, -170, 0, 130)
-		Button1.Text = "OPCIÓN 1"
-		Button1.BackgroundColor3 = Color3.fromRGB(0,170,255)
-		Button1.TextColor3 = Color3.new(1,1,1)
-		Button1.Font = Enum.Font.GothamBold
-		Button1.TextScaled = true
-		Button1.Parent = Second
-		Instance.new("UICorner", Button1).CornerRadius = UDim.new(0,12)
+-- Status Label
+local Status = Instance.new("TextLabel")
+Status.Size = UDim2.new(1,0,0,40)
+Status.Position = UDim2.new(0,0,1,-50)
+Status.BackgroundTransparency = 1
+Status.Text = ""
+Status.Font = Enum.Font.GothamBold
+Status.TextScaled = true
+Status.TextColor3 = Color3.fromRGB(255,255,255)
+Status.Parent = Second
 
-		Button1.MouseButton1Click:Connect(function()
-			Status.Text = "Activaste Opción 1"
-		end)
+-- Control variable (no doble click)
+local busy = false
 
-		-- Button 2
-		local Button2 = Instance.new("TextButton")
-		Button2.Size = UDim2.new(0, 150, 0, 40)
-		Button2.Position = UDim2.new(0.5, 20, 0, 130)
-		Button2.Text = "OPCIÓN 2"
-		Button2.BackgroundColor3 = Color3.fromRGB(200,0,255)
-		Button2.TextColor3 = Color3.new(1,1,1)
-		Button2.Font = Enum.Font.GothamBold
-		Button2.TextScaled = true
-		Button2.Parent = Second
-		Instance.new("UICorner", Button2).CornerRadius = UDim.new(0,12)
+local function createButton(text, posX)
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(0, 260, 0, 60)
+	btn.Position = UDim2.new(0.5, posX, 0.5, -30)
+	btn.Text = text
+	btn.Font = Enum.Font.GothamBold
+	btn.TextScaled = true
+	btn.BackgroundColor3 = Color3.fromRGB(150, 0, 200)
+	btn.TextColor3 = Color3.new(1,1,1)
+	btn.Parent = Second
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0,20)
+	
+	return btn
+end
 
-		Button2.MouseButton1Click:Connect(function()
-			Status.Text = "Activaste Opción 2"
-		end)
+local Button1 = createButton("Action One (1)", -130)
+local Button2 = createButton("Action Two", 130)
 
-	else
-		ResultLabel.Text = "❌ Incorrect key"
-		ResultLabel.TextColor3 = Color3.fromRGB(255,80,80)
+local function runCountdown(buttonName)
+	if busy then return end
+	busy = true
+	
+	Button1.Active = false
+	Button2.Active = false
+	
+	for i = 5,1,-1 do
+		Status.Text = buttonName.." starting in "..i
+		wait(1)
 	end
+	
+	Status.Text = "Successfully"
+	wait(2)
+	Status.Text = ""
+	
+	Button1.Active = true
+	Button2.Active = true
+	
+	busy = false
+end
+
+Button1.MouseButton1Click:Connect(function()
+	runCountdown("Action One")
+end)
+
+Button2.MouseButton1Click:Connect(function()
+	runCountdown("Action Two")
 end)
