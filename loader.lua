@@ -83,13 +83,23 @@ StrokeMain.Thickness = 5
 StrokeMain.Parent = Main
 
 -- Imagen de fondo
+-- Imagen de fondo (arreglada para que se vea bien tu mona anime rubia)
 local BackgroundImage = Instance.new("ImageLabel")
-BackgroundImage.Size = UDim2.new(1,0,1,0)
+BackgroundImage.Name = "MonaChinaBackground"
+BackgroundImage.Size = UDim2.new(1, 0, 1, 0)              -- Llena todo el frame
+BackgroundImage.Position = UDim2.new(0.5, 0, 0.5, 0)      -- Centro
+BackgroundImage.AnchorPoint = Vector2.new(0.5, 0.5)       -- Pivote en centro
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.Image = "rbxassetid://96939198021601"
-BackgroundImage.ScaleType = Enum.ScaleType.Crop
+BackgroundImage.ImageTransparency = 0                     -- Visible al 100%
+BackgroundImage.Image = "rbxassetid://96939198021601"     -- Tu ID
+BackgroundImage.ScaleType = Enum.ScaleType.Fit            -- ← CAMBIO CLAVE: Fit en vez de Crop (no corta la cara)
+BackgroundImage.ResampleMode = Enum.ResamplerMode.Default -- Mejor para anime (o Pixelated si quieres pixel art)
+BackgroundImage.ZIndex = 0                                -- Fondo
 BackgroundImage.Parent = Main
 
+-- Opcional: si quieres que la imagen sea un poquito más oscura para que los textos resalten más
+-- BackgroundImage.ImageColor3 = Color3.fromRGB(220, 220, 255)  -- Tinte suave azul claro
+-- BackgroundImage.ImageTransparency = 0.1  -- Ligeramente transparente si los textos se pierden
 -- Título
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1,0,0,60)
@@ -103,7 +113,7 @@ Title.ZIndex = 2
 Title.Parent = Main
 
 -- Botón X
-local CloseMain = Instance.new("TextButton")
+local CloseMain = Instance.new("")
 CloseMain.Size = UDim2.new(0,40,0,40)
 CloseMain.Position = UDim2.new(1,-50,0,10)
 CloseMain.Text = "X"
