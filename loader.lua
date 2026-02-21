@@ -217,55 +217,113 @@ Submit.MouseButton1Click:Connect(function()
 
 		local busy = false
 
-		local function runAction(text)
-			if busy then return end
-			busy = true
+	-- =========================
+-- SECOND WINDOW ARREGLADA
+-- =========================
+local Second = Instance.new("Frame")
+Second.Size = UDim2.new(0, 420, 0, 260)
+Second.Position = UDim2.new(0.5, -210, 0.5, -130)
+Second.BackgroundColor3 = Color3.fromRGB(45,0,70)
+Second.Parent = ScreenGui
+Second.Active = true
+Instance.new("UICorner", Second).CornerRadius = UDim.new(0,20)
 
-			Button1.Active = false
-			Button2.Active = false
+makeDraggable(Second)
 
-			for i = 5,1,-1 do
-				Status.Text = text.." en "..i
-				wait(1)
-			end
+local Stroke = Instance.new("UIStroke")
+Stroke.Color = Color3.fromRGB(200,0,255)
+Stroke.Thickness = 4
+Stroke.Parent = Second
 
-			Status.Text = "✅ Successfully"
-			wait(2)
+-- Close
+local Close2 = Instance.new("TextButton")
+Close2.Size = UDim2.new(0,30,0,30)
+Close2.Position = UDim2.new(1,-40,0,10)
+Close2.Text = "X"
+Close2.Font = Enum.Font.GothamBold
+Close2.TextScaled = true
+Close2.BackgroundColor3 = Color3.fromRGB(180,60,60)
+Close2.TextColor3 = Color3.new(1,1,1)
+Close2.Parent = Second
+Instance.new("UICorner", Close2).CornerRadius = UDim.new(1,0)
 
-			Status.Text = "Selecciona una opción"
-			Button1.Active = true
-			Button2.Active = true
-			busy = false
-		end
+Close2.MouseButton1Click:Connect(function()
+	Second:Destroy()
+	Main.Visible = true
+end)
 
-		-- Button 1
-		Button1 = Instance.new("TextButton")
-		Button1.Size = UDim2.new(0, 150, 0, 40)
-		Button1.Position = UDim2.new(0.5, -170, 0, 130)
-		Button1.Text = "OPCIÓN 1"
-		Button1.BackgroundColor3 = Color3.fromRGB(0,170,255)
-		Button1.TextColor3 = Color3.new(1,1,1)
-		Button1.Font = Enum.Font.GothamBold
-		Button1.TextScaled = true
-		Button1.Parent = Second
-		Instance.new("UICorner", Button1).CornerRadius = UDim.new(0,12)
+-- Title
+local SecondTitle = Instance.new("TextLabel")
+SecondTitle.Size = UDim2.new(1, 0, 0, 50)
+SecondTitle.BackgroundTransparency = 1
+SecondTitle.Text = "FRUIT STEEL PANEL"
+SecondTitle.Font = Enum.Font.GothamBlack
+SecondTitle.TextScaled = true
+SecondTitle.TextColor3 = Color3.fromRGB(255,255,255)
+SecondTitle.Parent = Second
 
-		Button1.MouseButton1Click:Connect(function()
-			runAction("Opción 1")
-		end)
+-- Status
+local Status = Instance.new("TextLabel")
+Status.Size = UDim2.new(1, 0, 0, 40)
+Status.Position = UDim2.new(0,0,0,60)
+Status.BackgroundTransparency = 1
+Status.Text = "Selecciona una opción"
+Status.Font = Enum.Font.GothamBold
+Status.TextScaled = true
+Status.TextColor3 = Color3.fromRGB(200,200,200)
+Status.Parent = Second
 
-		-- Button 2
-		Button2 = Instance.new("TextButton")
-		Button2.Size = UDim2.new(0, 150, 0, 40)
-		Button2.Position = UDim2.new(0.5, 20, 0, 130)
-		Button2.Text = "OPCIÓN 2"
-		Button2.BackgroundColor3 = Color3.fromRGB(200,0,255)
-		Button2.TextColor3 = Color3.new(1,1,1)
-		Button2.Font = Enum.Font.GothamBold
-		Button2.TextScaled = true
-		Button2.Parent = Second
-		Instance.new("UICorner", Button2).CornerRadius = UDim.new(0,12)
+-- Buttons
+local Button1 = Instance.new("TextButton")
+Button1.Size = UDim2.new(0, 150, 0, 40)
+Button1.Position = UDim2.new(0.5, -170, 0, 130)
+Button1.Text = "OPCIÓN 1"
+Button1.BackgroundColor3 = Color3.fromRGB(0,170,255)
+Button1.TextColor3 = Color3.new(1,1,1)
+Button1.Font = Enum.Font.GothamBold
+Button1.TextScaled = true
+Button1.Parent = Second
+Instance.new("UICorner", Button1).CornerRadius = UDim.new(0,12)
 
-		Button2.MouseButton1Click:Connect(function()
-			runAction("Opción 2")
-		end)
+local Button2 = Instance.new("TextButton")
+Button2.Size = UDim2.new(0, 150, 0, 40)
+Button2.Position = UDim2.new(0.5, 20, 0, 130)
+Button2.Text = "OPCIÓN 2"
+Button2.BackgroundColor3 = Color3.fromRGB(200,0,255)
+Button2.TextColor3 = Color3.new(1,1,1)
+Button2.Font = Enum.Font.GothamBold
+Button2.TextScaled = true
+Button2.Parent = Second
+Instance.new("UICorner", Button2).CornerRadius = UDim.new(0,12)
+
+-- Control
+local busy = false
+
+local function runAction(text)
+	if busy then return end
+	busy = true
+
+	Button1.Active = false
+	Button2.Active = false
+
+	for i = 5,1,-1 do
+		Status.Text = text.." en "..i
+		task.wait(1)
+	end
+
+	Status.Text = "✅ Successfully"
+	task.wait(2)
+
+	Status.Text = "Selecciona una opción"
+	Button1.Active = true
+	Button2.Active = true
+	busy = false
+end
+
+Button1.MouseButton1Click:Connect(function()
+	runAction("Opción 1")
+end)
+
+Button2.MouseButton1Click:Connect(function()
+	runAction("Opción 2")
+end)
