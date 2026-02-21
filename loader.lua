@@ -1,308 +1,264 @@
 local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
-
--- =====================================================
-local correctKey = "key_blox2026" -- Pon tu key aquí
--- =====================================================
-
+local player = Players.LocalPlayer
+local correctKey = "key_blox2026"
+-- Eliminar GUI anterior
 if player.PlayerGui:FindFirstChild("FruitSteel") then
-    player.PlayerGui.FruitSteel:Destroy()
+player.PlayerGui.FruitSteel:Destroy()
 end
-
--- función reusable de arrastre (funciona mouse + touch)
+-- =========================
+-- FUNCION DRAG PC + MOVIL
+-- =========================
 local function makeDraggable(frame)
-    local dragging = false
-    local dragInput
-    local dragStart
-    local startPos
-
-    local function update(input)
-        local delta = input.Position - dragStart
-        frame.Position = UDim2.new(
-            startPos.X.Scale,
-            startPos.X.Offset + delta.X,
-            startPos.Y.Scale,
-            startPos.Y.Offset + delta.Y
-        )
-    end
-
-    frame.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1
-        or input.UserInputType == Enum.UserInputType.Touch then
-            dragging = true
-            dragStart = input.Position
-            startPos = frame.Position
-
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                end
-            end)
-        end
-    end)
-
-    frame.InputChanged:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseMovement
-        or input.UserInputType == Enum.UserInputType.Touch then
-            dragInput = input
-        end
-    end)
-
-    UserInputService.InputChanged:Connect(function(input)
-        if input == dragInput and dragging then
-            update(input)
-        end
-    end)
+local dragging = false
+local dragStart
+local startPos
+local dragInput
+local function update(input)
+local delta = input.Position - dragStart
+frame.Position = UDim2.new(
+startPos.X.Scale,
+startPos.X.Offset + delta.X,
+startPos.Y.Scale,
+startPos.Y.Offset + delta.Y
+)
 end
-
--- ScreenGui
+frame.InputBegan:Connect(function(input)
+if input.UserInputType == Enum.UserInputType.MouseButton1
+or input.UserInputType == Enum.UserInputType.Touch then
+dragging = true
+dragStart = input.Position
+startPos = frame.Position
+input.Changed:Connect(function()
+if input.UserInputState == Enum.UserInputState.End then
+dragging = false
+end
+end)
+end
+end)
+frame.InputChanged:Connect(function(input)
+if input.UserInputType == Enum.UserInputType.MouseMovement
+or input.UserInputType == Enum.UserInputType.Touch then
+dragInput = input
+end
+end)
+UserInputService.InputChanged:Connect(function(input)
+if input == dragInput and dragging then
+update(input)
+end
+end)
+end
+-- =========================
+-- CREAR SCREEN GUI
+-- =========================
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "FruitSteel"
 ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = player:WaitForChild("PlayerGui")
-
--- Frame principal sólido (azul oscuro fuerte, sin transparencia)
+ScreenGui.Parent = player.PlayerGui
+-- =========================
+-- VENTANA PRINCIPAL (KEY)
+-- =========================
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 440, 0, 320)
-Main.Position = UDim2.new(0.5, -220, 0.5, -160)
-Main.BackgroundColor3 = Color3.fromRGB(20, 30, 55)
-Main.BackgroundTransparency = 0  -- Fondo fuerte y opaco
+Main.Size = UDim2.new(0, 500, 0, 330)
+Main.Position = UDim2.new(0.5, -250, 0.5, -165)
+Main.BackgroundColor3 = Color3.fromRGB(40, 0, 60)
 Main.Parent = ScreenGui
 Main.Active = true
-Instance.new("UICorner", Main).CornerRadius = UDim.new(0, 20)
-
--- aplicamos drag al Main
+Instance.new("UICorner", Main).CornerRadius = UDim.new(0,25)
 makeDraggable(Main)
-
--- Bordes dorados (amarillo dorado brillante)
-local GoldStroke = Instance.new("UIStroke")
-GoldStroke.Thickness = 6  -- grueso para que se vea bien
-GoldStroke.Color = Color3.fromRGB(255, 215, 0)  -- dorado/amariilo fuerte
-GoldStroke.Transparency = 0
-GoldStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-GoldStroke.Parent = Main
-
--- Fondo: chica anime neko (fuerte, sin transparencia)
+local StrokeMain = Instance.new("UIStroke")
+StrokeMain.Color = Color3.fromRGB(255,200,0)
+StrokeMain.Thickness = 5
+StrokeMain.Parent = Main
+-- Imagen de fondo
 local BackgroundImage = Instance.new("ImageLabel")
-BackgroundImage.Name = "NekoBackground"
-BackgroundImage.Size = UDim2.new(1, 0, 1, 0)
-BackgroundImage.Position = UDim2.new(0, 0, 0, 0)
+BackgroundImage.Size = UDim2.new(1,0,1,0)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.Image = "rbxassetid://122255224861955"  -- tu ID
-BackgroundImage.ImageTransparency = 0  -- totalmente opaca
+BackgroundImage.Image = "rbxassetid://113824786988245"
 BackgroundImage.ScaleType = Enum.ScaleType.Crop
-BackgroundImage.ZIndex = 0
 BackgroundImage.Parent = Main
-
--- Botón cerrar
-local Close = Instance.new("TextButton")
-Close.Size = UDim2.new(0, 30, 0, 30)
-Close.Position = UDim2.new(1, -40, 0, 10)
-Close.ZIndex = 5
-Close.Text = "X"
-Close.Font = Enum.Font.GothamBold
-Close.TextScaled = true
-Close.BackgroundColor3 = Color3.fromRGB(180, 60, 60)
-Close.TextColor3 = Color3.new(1, 1, 1)
-Close.Parent = Main
-Instance.new("UICorner", Close).CornerRadius = UDim.new(1, 0)
-Close.MouseButton1Click:Connect(function()
-    ScreenGui:Destroy()
-end)
-
 -- Título
 local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(1, 0, 0, 50)
+Title.Size = UDim2.new(1,0,0,60)
+Title.Position = UDim2.new(0,0,0,10)
 Title.BackgroundTransparency = 1
-Title.ZIndex = 5
 Title.Text = "FRUIT STEEL V2"
 Title.Font = Enum.Font.GothamBlack
 Title.TextScaled = true
-Title.TextColor3 = Color3.fromRGB(0, 170, 255)
+Title.TextColor3 = Color3.fromRGB(0,170,255)
+Title.ZIndex = 2
 Title.Parent = Main
-
--- Botón GET KEY
-local Button = Instance.new("TextButton")
-Button.Size = UDim2.new(0, 200, 0, 40)
-Button.Position = UDim2.new(0.5, -100, 0, 60)
-Button.ZIndex = 5
-Button.BackgroundColor3 = Color3.fromRGB(0, 120, 200)
-Button.Text = "GET KEY"
-Button.Font = Enum.Font.GothamBold
-Button.TextScaled = true
-Button.TextColor3 = Color3.new(1, 1, 1)
-Button.Parent = Main
-Instance.new("UICorner", Button).CornerRadius = UDim.new(0, 15)
-
-Button.MouseEnter:Connect(function()
-    TweenService:Create(Button, TweenInfo.new(0.2), { BackgroundColor3 = Color3.fromRGB(0, 160, 255) }):Play()
+-- Botón X
+local CloseMain = Instance.new("TextButton")
+CloseMain.Size = UDim2.new(0,40,0,40)
+CloseMain.Position = UDim2.new(1,-50,0,10)
+CloseMain.Text = "X"
+CloseMain.Font = Enum.Font.GothamBold
+CloseMain.TextScaled = true
+CloseMain.BackgroundColor3 = Color3.fromRGB(200,60,60)
+CloseMain.TextColor3 = Color3.new(1,1,1)
+CloseMain.ZIndex = 3
+CloseMain.Parent = Main
+Instance.new("UICorner", CloseMain).CornerRadius = UDim.new(1,0)
+CloseMain.MouseButton1Click:Connect(function()
+Main.Visible = false
 end)
-Button.MouseLeave:Connect(function()
-    TweenService:Create(Button, TweenInfo.new(0.2), { BackgroundColor3 = Color3.fromRGB(0, 120, 200) }):Play()
-end)
-
-Button.MouseButton1Click:Connect(function()
-    local discordLink = "https://discord.gg/8hSAwwz86j"
-    pcall(function()
-        if setclipboard then setclipboard(discordLink) end
-    end)
-    Button.Text = "SUCCESSFULLY COPIED!"
-    Button.BackgroundColor3 = Color3.fromRGB(0, 200, 140)
-    wait(3)
-    Button.Text = "GET KEY"
-    Button.BackgroundColor3 = Color3.fromRGB(0, 120, 200)
-end)
-
--- KeyBox
+-- Botón Obtener llave
+local GetKey = Instance.new("TextButton")
+GetKey.Size = UDim2.new(0.5,0,0,45)
+GetKey.Position = UDim2.new(0.25,0,0.28,0)
+GetKey.BackgroundColor3 = Color3.fromRGB(0,120,200)
+GetKey.Text = "OBTENER LLAVE"
+GetKey.Font = Enum.Font.GothamBold
+GetKey.TextScaled = true
+GetKey.TextColor3 = Color3.new(1,1,1)
+GetKey.ZIndex = 2
+GetKey.Parent = Main
+Instance.new("UICorner", GetKey).CornerRadius = UDim.new(1,0)
+-- TextBox
 local KeyBox = Instance.new("TextBox")
-KeyBox.Size = UDim2.new(0, 300, 0, 40)
-KeyBox.Position = UDim2.new(0.5, -150, 0, 115)
-KeyBox.ZIndex = 5
-KeyBox.BackgroundColor3 = Color3.fromRGB(30, 40, 65)
-KeyBox.TextColor3 = Color3.new(1, 1, 1)
+KeyBox.Size = UDim2.new(0.7,0,0,50)
+KeyBox.Position = UDim2.new(0.15,0,0.45,0)
+KeyBox.BackgroundColor3 = Color3.fromRGB(20,30,50)
+KeyBox.TextColor3 = Color3.new(1,1,1)
 KeyBox.PlaceholderText = "Introduce tu key..."
-KeyBox.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
 KeyBox.Font = Enum.Font.Gotham
 KeyBox.TextScaled = true
-KeyBox.ClearTextOnFocus = false
+KeyBox.ZIndex = 2
 KeyBox.Parent = Main
-Instance.new("UICorner", KeyBox).CornerRadius = UDim.new(0, 10)
-
--- Submit
+Instance.new("UICorner", KeyBox).CornerRadius = UDim.new(0,15)
+-- Botón enviar
 local Submit = Instance.new("TextButton")
-Submit.Size = UDim2.new(0, 120, 0, 40)
-Submit.Position = UDim2.new(0.5, -60, 0, 170)
-Submit.ZIndex = 5
-Submit.BackgroundColor3 = Color3.fromRGB(0, 150, 100)
-Submit.Text = "SUBMIT"
+Submit.Size = UDim2.new(0.5,0,0,50)
+Submit.Position = UDim2.new(0.25,0,0.65,0)
+Submit.BackgroundColor3 = Color3.fromRGB(0,160,100)
+Submit.Text = "ENVIAR"
 Submit.Font = Enum.Font.GothamBold
 Submit.TextScaled = true
-Submit.TextColor3 = Color3.new(1, 1, 1)
+Submit.TextColor3 = Color3.new(1,1,1)
+Submit.ZIndex = 2
 Submit.Parent = Main
-Instance.new("UICorner", Submit).CornerRadius = UDim.new(0, 15)
-
-Submit.MouseEnter:Connect(function()
-    TweenService:Create(Submit, TweenInfo.new(0.2), { BackgroundColor3 = Color3.fromRGB(0, 200, 140) }):Play()
-end)
-Submit.MouseLeave:Connect(function()
-    TweenService:Create(Submit, TweenInfo.new(0.2), { BackgroundColor3 = Color3.fromRGB(0, 150, 100) }):Play()
-end)
-
--- Result
-local ResultLabel = Instance.new("TextLabel")
-ResultLabel.Size = UDim2.new(0, 300, 0, 30)
-ResultLabel.Position = UDim2.new(0.5, -150, 0, 220)
-ResultLabel.ZIndex = 5
-ResultLabel.BackgroundTransparency = 1
-ResultLabel.Text = ""
-ResultLabel.Font = Enum.Font.GothamBold
-ResultLabel.TextScaled = true
-ResultLabel.TextColor3 = Color3.new(1, 1, 1)
-ResultLabel.Parent = Main
-
--- Submit behavior (key check + create second GUI if correct)
-Submit.MouseButton1Click:Connect(function()
-
-    local enteredKey = KeyBox.Text:match("^%s*(.-)%s*$")
-
-    if enteredKey == correctKey then
-
-        ResultLabel.Text = "✅ Correct key"
-        ResultLabel.TextColor3 = Color3.fromRGB(0, 255, 100)
-
-        wait(2)
-        Main:Destroy()
-
-        -- =========================
-        -- SEGUNDA GUI MORADA
-        -- =========================
-
-        local Second = Instance.new("Frame")
-        Second.Size = UDim2.new(0, 420, 0, 260)
-        Second.Position = UDim2.new(0.5, -210, 0.5, -130)
-        Second.BackgroundColor3 = Color3.fromRGB(45, 0, 70)
-        Second.Parent = ScreenGui
-        Second.Active = true
-        Instance.new("UICorner", Second).CornerRadius = UDim.new(0, 20)
-
-        -- aplicamos drag a la segunda ventana también
-        makeDraggable(Second)
-
-        local Stroke = Instance.new("UIStroke")
-        Stroke.Color = Color3.fromRGB(200, 0, 255)
-        Stroke.Thickness = 4
-        Stroke.Parent = Second
-
-        local Title2 = Instance.new("TextLabel")
-        Title2.Size = UDim2.new(1, 0, 0, 50)
-        Title2.BackgroundTransparency = 1
-        Title2.Text = "FRUIT STEEL PANEL"
-        Title2.Font = Enum.Font.GothamBlack
-        Title2.TextScaled = true
-        Title2.TextColor3 = Color3.fromRGB(210, 120, 255)
-        Title2.Parent = Second
-
-        local button1Name = "Action One"
-        local button2Name = "Action Two"
-
-        local function createButton(name, posY)
-
-            local Btn = Instance.new("TextButton")
-            Btn.Size = UDim2.new(0, 250, 0, 45)
-            Btn.Position = UDim2.new(0.5, -125, 0, posY)
-            Btn.BackgroundColor3 = Color3.fromRGB(120, 0, 180)
-            Btn.Text = name
-            Btn.Font = Enum.Font.GothamBold
-            Btn.TextScaled = true
-            Btn.TextColor3 = Color3.new(1,1,1)
-            Btn.Parent = Second
-            Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 15)
-
-            local busy = false
-
-            Btn.MouseButton1Click:Connect(function()
-                if busy then return end
-                busy = true
-
-                local originalText = name
-
-                for i = 5, 1, -1 do
-                    Btn.Text = originalText .. " ("..i..")"
-                    wait(1)
-                end
-
-                Btn.Text = "Successfully"
-                Btn.BackgroundColor3 = Color3.fromRGB(0, 200, 140)
-
-                wait(2)
-
-                Btn.Text = originalText
-                Btn.BackgroundColor3 = Color3.fromRGB(120, 0, 180)
-                busy = false
-            end)
-        end
-
-        createButton(button1Name, 80)
-        createButton(button2Name, 140)
-
-    else
-
-        ResultLabel.Text = "❌ Incorrect key"
-        ResultLabel.TextColor3 = Color3.fromRGB(255, 80, 80)
-
-    end
-end)   
-
+Instance.new("UICorner", Submit).CornerRadius = UDim.new(1,0)
+-- Resultado
+local Result = Instance.new("TextLabel")
+Result.Size = UDim2.new(1,0,0,30)
+Result.Position = UDim2.new(0,0,0.85,0)
+Result.BackgroundTransparency = 1
+Result.Text = ""
+Result.Font = Enum.Font.GothamBold
+Result.TextScaled = true
+Result.ZIndex = 2
+Result.Parent = Main
 -- Footer
 local Footer = Instance.new("TextLabel")
-Footer.Size = UDim2.new(1, 0, 0, 30)
-Footer.Position = UDim2.new(0, 0, 1, -35)
-Footer.ZIndex = 5
+Footer.Size = UDim2.new(1,0,0,30)
+Footer.Position = UDim2.new(0,0,1,-35)
 Footer.BackgroundTransparency = 1
 Footer.Text = "Only Blox Fruits"
 Footer.Font = Enum.Font.GothamBold
 Footer.TextScaled = true
-Footer.TextColor3 = Color3.fromRGB(120, 150, 200)
+Footer.TextColor3 = Color3.fromRGB(150,180,255)
+Footer.ZIndex = 2
 Footer.Parent = Main
+-- =========================
+-- SEGUNDA VENTANA (TUYA)
+-- =========================
+local function openSecondPanel()
+Main.Visible = false
+local Panel = Instance.new("Frame")
+Panel.Size = UDim2.new(0, 500, 0, 350)
+Panel.Position = UDim2.new(0.5, -250, 0.5, -175)
+Panel.BackgroundColor3 = Color3.fromRGB(60,0,90)
+Panel.Parent = ScreenGui
+Panel.Active = true
+Instance.new("UICorner", Panel).CornerRadius = UDim.new(0,25)
+makeDraggable(Panel)
+local Stroke = Instance.new("UIStroke")
+Stroke.Color = Color3.fromRGB(220,0,255)
+Stroke.Thickness = 5
+Stroke.Parent = Panel
+local Title2 = Instance.new("TextLabel")
+Title2.Size = UDim2.new(1,0,0,70)
+Title2.BackgroundTransparency = 1
+Title2.Text = "FRUIT STEEL PANEL"
+Title2.Font = Enum.Font.GothamBlack
+Title2.TextScaled = true
+Title2.TextColor3 = Color3.fromRGB(255,170,255)
+Title2.Parent = Panel
+local Status = Instance.new("TextLabel")
+Status.Size = UDim2.new(1,0,0,40)
+Status.Position = UDim2.new(0,0,1,-50)
+Status.BackgroundTransparency = 1
+Status.Text = ""
+Status.Font = Enum.Font.GothamBold
+Status.TextScaled = true
+Status.TextColor3 = Color3.new(1,1,1)
+Status.Parent = Panel
+local busy = false
+local function createButton(text, posY)
+local btn = Instance.new("TextButton")
+btn.Size = UDim2.new(0.6,0,0,60)
+btn.Position = UDim2.new(0.2,0,posY,0)
+btn.BackgroundColor3 = Color3.fromRGB(170,0,230)
+btn.Text = text
+btn.Font = Enum.Font.GothamBold
+btn.TextScaled = true
+btn.TextColor3 = Color3.new(1,1,1)
+btn.Parent = Panel
+Instance.new("UICorner", btn).CornerRadius = UDim.new(0,20)
+return btn
+end
+local Button1 = createButton("Action One (1)", 0.35)
+local Button2 = createButton("Action Two", 0.55)
+local function runAction(name)
+if busy then return end
+busy = true
+Button1.Active = false
+Button2.Active = false
+for i = 5,1,-1 do
+Status.Text = name.." in "..i
+task.wait(1)
+end
+Status.Text = "Successfully"
+task.wait(2)
+Status.Text = ""
+Button1.Active = true
+Button2.Active = true
+busy = false
+end
+Button1.MouseButton1Click:Connect(function()
+runAction("Action One")
+end)
+Button2.MouseButton1Click:Connect(function()
+runAction("Action Two")
+end)
+local Close = Instance.new("TextButton")
+Close.Size = UDim2.new(0,35,0,35)
+Close.Position = UDim2.new(1,-45,0,10)
+Close.Text = "X"
+Close.Font = Enum.Font.GothamBold
+Close.TextScaled = true
+Close.BackgroundColor3 = Color3.fromRGB(180,60,60)
+Close.TextColor3 = Color3.new(1,1,1)
+Close.Parent = Panel
+Instance.new("UICorner", Close).CornerRadius = UDim.new(1,0)
+Close.MouseButton1Click:Connect(function()
+Panel:Destroy()
+Main.Visible = true
+end)
+end
+-- =========================
+-- VALIDAR KEY
+-- =========================
+Submit.MouseButton1Click:Connect(function()
+local enteredKey = KeyBox.Text:match("^%s*(.-)%s*$")
+if enteredKey == correctKey then
+Result.Text = "Correct key"
+Result.TextColor3 = Color3.fromRGB(0,255,100)
+task.wait(1)
+openSecondPanel()
+else
+Result.Text = "Incorrect key"
+Result.TextColor3 = Color3.fromRGB(255,80,80)
+end
+end)
