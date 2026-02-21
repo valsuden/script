@@ -28,8 +28,7 @@ local function makeDraggable(frame)
 	end
 
 	frame.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1
-		or input.UserInputType == Enum.UserInputType.Touch then
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
 			dragging = true
 			dragStart = input.Position
 			startPos = frame.Position
@@ -43,8 +42,7 @@ local function makeDraggable(frame)
 	end)
 
 	frame.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement
-		or input.UserInputType == Enum.UserInputType.Touch then
+		if input.UserInputType == Enum.UserInputType.MouseMovement then
 			dragInput = input
 		end
 	end)
@@ -57,7 +55,7 @@ local function makeDraggable(frame)
 end
 
 -- =========================
--- MAIN GUI
+-- MAIN GUI (NO TOCADA)
 -- =========================
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "FruitSteel"
@@ -71,7 +69,6 @@ Main.BackgroundTransparency = 1
 Main.Parent = ScreenGui
 Main.Active = true
 Instance.new("UICorner", Main).CornerRadius = UDim.new(0, 20)
-
 makeDraggable(Main)
 
 local GoldStroke = Instance.new("UIStroke")
@@ -87,7 +84,6 @@ BackgroundImage.ScaleType = Enum.ScaleType.Crop
 BackgroundImage.Parent = Main
 Instance.new("UICorner", BackgroundImage).CornerRadius = UDim.new(0, 20)
 
--- Close Main
 local Close = Instance.new("TextButton")
 Close.Size = UDim2.new(0, 30, 0, 30)
 Close.Position = UDim2.new(1, -40, 0, 10)
@@ -103,7 +99,6 @@ Close.MouseButton1Click:Connect(function()
 	ScreenGui:Destroy()
 end)
 
--- Title
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1, 0, 0, 50)
 Title.BackgroundTransparency = 1
@@ -113,7 +108,6 @@ Title.TextScaled = true
 Title.TextColor3 = Color3.fromRGB(0, 170, 255)
 Title.Parent = Main
 
--- KeyBox
 local KeyBox = Instance.new("TextBox")
 KeyBox.Size = UDim2.new(0, 300, 0, 40)
 KeyBox.Position = UDim2.new(0.5, -150, 0, 100)
@@ -125,7 +119,6 @@ KeyBox.TextScaled = true
 KeyBox.Parent = Main
 Instance.new("UICorner", KeyBox).CornerRadius = UDim.new(0, 10)
 
--- Submit
 local Submit = Instance.new("TextButton")
 Submit.Size = UDim2.new(0, 120, 0, 40)
 Submit.Position = UDim2.new(0.5, -60, 0, 160)
@@ -150,18 +143,18 @@ ResultLabel.Parent = Main
 -- KEY CHECK
 -- =========================
 Submit.MouseButton1Click:Connect(function()
-
 	local enteredKey = KeyBox.Text:match("^%s*(.-)%s*$")
 
 	if enteredKey == correctKey then
 		ResultLabel.Text = "✅ Correct key"
 		ResultLabel.TextColor3 = Color3.fromRGB(0,255,100)
-		wait(1)
+		task.wait(1)
 		Main.Visible = false
 
 		-- =========================
-		-- SECOND WINDOW
+		-- SECOND WINDOW (ARREGLADA)
 		-- =========================
+
 		local Second = Instance.new("Frame")
 		Second.Size = UDim2.new(0, 420, 0, 260)
 		Second.Position = UDim2.new(0.5, -210, 0.5, -130)
@@ -169,7 +162,6 @@ Submit.MouseButton1Click:Connect(function()
 		Second.Parent = ScreenGui
 		Second.Active = true
 		Instance.new("UICorner", Second).CornerRadius = UDim.new(0,20)
-
 		makeDraggable(Second)
 
 		local Stroke = Instance.new("UIStroke")
@@ -177,7 +169,6 @@ Submit.MouseButton1Click:Connect(function()
 		Stroke.Thickness = 4
 		Stroke.Parent = Second
 
-		-- Close Second
 		local Close2 = Instance.new("TextButton")
 		Close2.Size = UDim2.new(0,30,0,30)
 		Close2.Position = UDim2.new(1,-40,0,10)
@@ -194,9 +185,8 @@ Submit.MouseButton1Click:Connect(function()
 			Main.Visible = true
 		end)
 
-		-- Title Second
 		local SecondTitle = Instance.new("TextLabel")
-		SecondTitle.Size = UDim2.new(1, 0, 0, 50)
+		SecondTitle.Size = UDim2.new(1,0,0,50)
 		SecondTitle.BackgroundTransparency = 1
 		SecondTitle.Text = "FRUIT STEEL PANEL"
 		SecondTitle.Font = Enum.Font.GothamBlack
@@ -204,9 +194,8 @@ Submit.MouseButton1Click:Connect(function()
 		SecondTitle.TextColor3 = Color3.fromRGB(255,255,255)
 		SecondTitle.Parent = Second
 
-		-- Status Label
 		local Status = Instance.new("TextLabel")
-		Status.Size = UDim2.new(1, 0, 0, 40)
+		Status.Size = UDim2.new(1,0,0,40)
 		Status.Position = UDim2.new(0,0,0,60)
 		Status.BackgroundTransparency = 1
 		Status.Text = "Selecciona una opción"
@@ -215,10 +204,9 @@ Submit.MouseButton1Click:Connect(function()
 		Status.TextColor3 = Color3.fromRGB(200,200,200)
 		Status.Parent = Second
 
-		-- Button 1
 		local Button1 = Instance.new("TextButton")
-		Button1.Size = UDim2.new(0, 150, 0, 40)
-		Button1.Position = UDim2.new(0.5, -170, 0, 130)
+		Button1.Size = UDim2.new(0,150,0,45)
+		Button1.Position = UDim2.new(0.5,-170,0,130)
 		Button1.Text = "OPCIÓN 1"
 		Button1.BackgroundColor3 = Color3.fromRGB(0,170,255)
 		Button1.TextColor3 = Color3.new(1,1,1)
@@ -227,14 +215,9 @@ Submit.MouseButton1Click:Connect(function()
 		Button1.Parent = Second
 		Instance.new("UICorner", Button1).CornerRadius = UDim.new(0,12)
 
-		Button1.MouseButton1Click:Connect(function()
-			Status.Text = "Activaste Opción 1"
-		end)
-
-		-- Button 2
 		local Button2 = Instance.new("TextButton")
-		Button2.Size = UDim2.new(0, 150, 0, 40)
-		Button2.Position = UDim2.new(0.5, 20, 0, 130)
+		Button2.Size = UDim2.new(0,150,0,45)
+		Button2.Position = UDim2.new(0.5,20,0,130)
 		Button2.Text = "OPCIÓN 2"
 		Button2.BackgroundColor3 = Color3.fromRGB(200,0,255)
 		Button2.TextColor3 = Color3.new(1,1,1)
@@ -243,12 +226,44 @@ Submit.MouseButton1Click:Connect(function()
 		Button2.Parent = Second
 		Instance.new("UICorner", Button2).CornerRadius = UDim.new(0,12)
 
+		local busy = false
+
+		local function runAction(text)
+			if busy then return end
+			busy = true
+
+			Button1.Active = false
+			Button2.Active = false
+			Button1.AutoButtonColor = false
+			Button2.AutoButtonColor = false
+
+			for i = 5,1,-1 do
+				Status.Text = text.." en "..i
+				task.wait(1)
+			end
+
+			Status.Text = "✅ Successfully"
+			task.wait(2)
+			Status.Text = "Selecciona una opción"
+
+			Button1.Active = true
+			Button2.Active = true
+			Button1.AutoButtonColor = true
+			Button2.AutoButtonColor = true
+
+			busy = false
+		end
+
+		Button1.MouseButton1Click:Connect(function()
+			runAction("Opción 1")
+		end)
+
 		Button2.MouseButton1Click:Connect(function()
-			Status.Text = "Activaste Opción 2"
+			runAction("Opción 2")
 		end)
 
 	else
-		ResultLabel.Text = "❌ Incorrect key"
-		ResultLabel.TextColor3 = Color3.fromRGB(255,80,80)
+		ResultLabel.Text = "❌ Key incorrecta"
+		ResultLabel.TextColor3 = Color3.fromRGB(255,60,60)
 	end
 end)
