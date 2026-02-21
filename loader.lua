@@ -85,7 +85,7 @@ StrokeMain.Parent = Main
 -- Imagen de fondo
 local BackgroundImage = Instance.new("ImageLabel")
 BackgroundImage.Size = UDim2.new(1,0,1,0)
-BackgroundImage.BackgroundTransparency = 1
+BackgroundImage.BackgroundTransparency = 0
 BackgroundImage.Image = "rbxassetid://113824786988245"
 BackgroundImage.ScaleType = Enum.ScaleType.Crop
 BackgroundImage.Parent = Main
@@ -94,7 +94,7 @@ BackgroundImage.Parent = Main
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1,0,0,60)
 Title.Position = UDim2.new(0,0,0,10)
-Title.BackgroundTransparency = 1
+Title.BackgroundTransparency = 0
 Title.Text = "FRUIT STEEL V2"
 Title.Font = Enum.Font.GothamBlack
 Title.TextScaled = true
