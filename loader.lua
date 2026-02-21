@@ -69,53 +69,94 @@ ScreenGui.Parent = player.PlayerGui
 -- VENTANA PRINCIPAL (KEY)
 -- =========================
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 420, 0, 280)
-Main.Position = UDim2.new(0.5, -210, 0.5, -140)
-Main.BackgroundColor3 = Color3.fromRGB(30, 0, 50)
+Main.Size = UDim2.new(0, 500, 0, 330)
+Main.Position = UDim2.new(0.5, -250, 0.5, -165)
+Main.BackgroundColor3 = Color3.fromRGB(40, 0, 60)
 Main.Parent = ScreenGui
 Main.Active = true
-Instance.new("UICorner", Main).CornerRadius = UDim.new(0,20)
-
+Instance.new("UICorner", Main).CornerRadius = UDim.new(0,25)
 makeDraggable(Main)
 
 local StrokeMain = Instance.new("UIStroke")
-StrokeMain.Color = Color3.fromRGB(200,0,255)
-StrokeMain.Thickness = 4
+StrokeMain.Color = Color3.fromRGB(255,200,0)
+StrokeMain.Thickness = 5
 StrokeMain.Parent = Main
+
+-- Imagen de fondo
+local BackgroundImage = Instance.new("ImageLabel")
+BackgroundImage.Size = UDim2.new(1,0,1,0)
+BackgroundImage.BackgroundTransparency = 1
+BackgroundImage.Image = "rbxassetid://113824786988245"
+BackgroundImage.ScaleType = Enum.ScaleType.Crop
+BackgroundImage.Parent = Main
 
 -- Título
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1,0,0,60)
+Title.Position = UDim2.new(0,0,0,10)
 Title.BackgroundTransparency = 1
 Title.Text = "FRUIT STEEL V2"
 Title.Font = Enum.Font.GothamBlack
 Title.TextScaled = true
-Title.TextColor3 = Color3.fromRGB(255,150,255)
+Title.TextColor3 = Color3.fromRGB(0,170,255)
+Title.ZIndex = 2
 Title.Parent = Main
+
+-- Botón X
+local CloseMain = Instance.new("TextButton")
+CloseMain.Size = UDim2.new(0,40,0,40)
+CloseMain.Position = UDim2.new(1,-50,0,10)
+CloseMain.Text = "X"
+CloseMain.Font = Enum.Font.GothamBold
+CloseMain.TextScaled = true
+CloseMain.BackgroundColor3 = Color3.fromRGB(200,60,60)
+CloseMain.TextColor3 = Color3.new(1,1,1)
+CloseMain.ZIndex = 3
+CloseMain.Parent = Main
+Instance.new("UICorner", CloseMain).CornerRadius = UDim.new(1,0)
+
+CloseMain.MouseButton1Click:Connect(function()
+	Main.Visible = false
+end)
+
+-- Botón Obtener llave
+local GetKey = Instance.new("TextButton")
+GetKey.Size = UDim2.new(0.5,0,0,45)
+GetKey.Position = UDim2.new(0.25,0,0.28,0)
+GetKey.BackgroundColor3 = Color3.fromRGB(0,120,200)
+GetKey.Text = "OBTENER LLAVE"
+GetKey.Font = Enum.Font.GothamBold
+GetKey.TextScaled = true
+GetKey.TextColor3 = Color3.new(1,1,1)
+GetKey.ZIndex = 2
+GetKey.Parent = Main
+Instance.new("UICorner", GetKey).CornerRadius = UDim.new(1,0)
 
 -- TextBox
 local KeyBox = Instance.new("TextBox")
-KeyBox.Size = UDim2.new(0.8,0,0,45)
-KeyBox.Position = UDim2.new(0.1,0,0.4,0)
-KeyBox.BackgroundColor3 = Color3.fromRGB(50,0,80)
+KeyBox.Size = UDim2.new(0.7,0,0,50)
+KeyBox.Position = UDim2.new(0.15,0,0.45,0)
+KeyBox.BackgroundColor3 = Color3.fromRGB(20,30,50)
 KeyBox.TextColor3 = Color3.new(1,1,1)
 KeyBox.PlaceholderText = "Introduce tu key..."
 KeyBox.Font = Enum.Font.Gotham
 KeyBox.TextScaled = true
+KeyBox.ZIndex = 2
 KeyBox.Parent = Main
-Instance.new("UICorner", KeyBox).CornerRadius = UDim.new(0,12)
+Instance.new("UICorner", KeyBox).CornerRadius = UDim.new(0,15)
 
 -- Botón enviar
 local Submit = Instance.new("TextButton")
-Submit.Size = UDim2.new(0.5,0,0,45)
+Submit.Size = UDim2.new(0.5,0,0,50)
 Submit.Position = UDim2.new(0.25,0,0.65,0)
-Submit.BackgroundColor3 = Color3.fromRGB(160,0,220)
+Submit.BackgroundColor3 = Color3.fromRGB(0,160,100)
 Submit.Text = "ENVIAR"
 Submit.Font = Enum.Font.GothamBold
 Submit.TextScaled = true
 Submit.TextColor3 = Color3.new(1,1,1)
+Submit.ZIndex = 2
 Submit.Parent = Main
-Instance.new("UICorner", Submit).CornerRadius = UDim.new(0,15)
+Instance.new("UICorner", Submit).CornerRadius = UDim.new(1,0)
 
 -- Resultado
 local Result = Instance.new("TextLabel")
@@ -125,10 +166,23 @@ Result.BackgroundTransparency = 1
 Result.Text = ""
 Result.Font = Enum.Font.GothamBold
 Result.TextScaled = true
+Result.ZIndex = 2
 Result.Parent = Main
 
+-- Footer
+local Footer = Instance.new("TextLabel")
+Footer.Size = UDim2.new(1,0,0,30)
+Footer.Position = UDim2.new(0,0,1,-35)
+Footer.BackgroundTransparency = 1
+Footer.Text = "Only Blox Fruits"
+Footer.Font = Enum.Font.GothamBold
+Footer.TextScaled = true
+Footer.TextColor3 = Color3.fromRGB(150,180,255)
+Footer.ZIndex = 2
+Footer.Parent = Main
+
 -- =========================
--- SEGUNDA VENTANA FUNCION
+-- SEGUNDA VENTANA (TUYA)
 -- =========================
 local function openSecondPanel()
 	Main.Visible = false
@@ -140,7 +194,6 @@ local function openSecondPanel()
 	Panel.Parent = ScreenGui
 	Panel.Active = true
 	Instance.new("UICorner", Panel).CornerRadius = UDim.new(0,25)
-
 	makeDraggable(Panel)
 
 	local Stroke = Instance.new("UIStroke")
@@ -148,7 +201,6 @@ local function openSecondPanel()
 	Stroke.Thickness = 5
 	Stroke.Parent = Panel
 
-	-- Título
 	local Title2 = Instance.new("TextLabel")
 	Title2.Size = UDim2.new(1,0,0,70)
 	Title2.BackgroundTransparency = 1
@@ -158,7 +210,6 @@ local function openSecondPanel()
 	Title2.TextColor3 = Color3.fromRGB(255,170,255)
 	Title2.Parent = Panel
 
-	-- Estado
 	local Status = Instance.new("TextLabel")
 	Status.Size = UDim2.new(1,0,0,40)
 	Status.Position = UDim2.new(0,0,1,-50)
@@ -169,7 +220,6 @@ local function openSecondPanel()
 	Status.TextColor3 = Color3.new(1,1,1)
 	Status.Parent = Panel
 
-	-- Control bloqueo
 	local busy = false
 
 	local function createButton(text, posY)
@@ -218,7 +268,6 @@ local function openSecondPanel()
 		runAction("Action Two")
 	end)
 
-	-- Botón cerrar
 	local Close = Instance.new("TextButton")
 	Close.Size = UDim2.new(0,35,0,35)
 	Close.Position = UDim2.new(1,-45,0,10)
