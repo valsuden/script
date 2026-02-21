@@ -86,7 +86,7 @@ StrokeMain.Parent = Main
 local BackgroundImage = Instance.new("ImageLabel")
 BackgroundImage.Size = UDim2.new(1,0,1,0)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.Image = "rbxassetid://113824786988245"
+BackgroundImage.Image = "rbxassetid://96939198021601"
 BackgroundImage.ScaleType = Enum.ScaleType.Crop
 BackgroundImage.Parent = Main
 
