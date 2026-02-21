@@ -11,6 +11,53 @@ if player.PlayerGui:FindFirstChild("FruitSteel") then
     player.PlayerGui.FruitSteel:Destroy()
 end
 
+-- función reusable de arrastre (funciona mouse + touch)
+local function makeDraggable(frame)
+    local dragging = false
+    local dragInput
+    local dragStart
+    local startPos
+
+    local function update(input)
+        local delta = input.Position - dragStart
+        frame.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1
+        or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = frame.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement
+        or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            update(input)
+        end
+    end)
+end
+
+-- ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "FruitSteel"
 ScreenGui.ResetOnSpawn = false
@@ -26,7 +73,10 @@ Main.Parent = ScreenGui
 Main.Active = true
 Instance.new("UICorner", Main).CornerRadius = UDim.new(0, 20)
 
--- Bordes dorados (amarillo dorado brillante, sin RGB)
+-- aplicamos drag al Main
+makeDraggable(Main)
+
+-- Bordes dorados (amarillo dorado brillante)
 local GoldStroke = Instance.new("UIStroke")
 GoldStroke.Thickness = 6  -- grueso para que se vea bien
 GoldStroke.Color = Color3.fromRGB(255, 215, 0)  -- dorado/amariilo fuerte
@@ -34,55 +84,23 @@ GoldStroke.Transparency = 0
 GoldStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 GoldStroke.Parent = Main
 
--- Fondo: chica anime neko bonita (fuerte, sin transparencia)
+-- Fondo: chica anime neko (fuerte, sin transparencia)
 local BackgroundImage = Instance.new("ImageLabel")
 BackgroundImage.Name = "NekoBackground"
 BackgroundImage.Size = UDim2.new(1, 0, 1, 0)
 BackgroundImage.Position = UDim2.new(0, 0, 0, 0)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.Image = "rbxassetid://122255224861955"  -- neko cute pelo blanco, orejas, kawaii
-BackgroundImage.ImageTransparency = 0  -- 0 = completamente opaca y fuerte, se ve clarita
-BackgroundImage.ScaleType = Enum.ScaleType.Crop  -- o .Fit si se ve mejor así
+BackgroundImage.Image = "rbxassetid://122255224861955"  -- tu ID
+BackgroundImage.ImageTransparency = 0  -- totalmente opaca
+BackgroundImage.ScaleType = Enum.ScaleType.Crop
 BackgroundImage.ZIndex = 0
 BackgroundImage.Parent = Main
-
--- Sistema de arrastre
-local dragging, dragInput, dragStart, startPos
-local function update(input)
-    local delta = input.Position - dragStart
-    Main.Position = UDim2.new(
-        startPos.X.Scale, startPos.X.Offset + delta.X,
-        startPos.Y.Scale, startPos.Y.Offset + delta.Y
-    )
-end
-Main.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = true
-        dragStart = input.Position
-        startPos = Main.Position
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
-end)
-Main.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement then
-        dragInput = input
-    end
-end)
-UserInputService.InputChanged:Connect(function(input)
-    if input == dragInput and dragging then
-        update(input)
-    end
-end)
 
 -- Botón cerrar
 local Close = Instance.new("TextButton")
 Close.Size = UDim2.new(0, 30, 0, 30)
 Close.Position = UDim2.new(1, -40, 0, 10)
-Close.ZIndex = 10
+Close.ZIndex = 5
 Close.Text = "X"
 Close.Font = Enum.Font.GothamBold
 Close.TextScaled = true
@@ -128,7 +146,7 @@ end)
 Button.MouseButton1Click:Connect(function()
     local discordLink = "https://discord.gg/8hSAwwz86j"
     pcall(function()
-        setclipboard(discordLink)
+        if setclipboard then setclipboard(discordLink) end
     end)
     Button.Text = "SUCCESSFULLY COPIED!"
     Button.BackgroundColor3 = Color3.fromRGB(0, 200, 140)
@@ -184,6 +202,7 @@ ResultLabel.TextScaled = true
 ResultLabel.TextColor3 = Color3.new(1, 1, 1)
 ResultLabel.Parent = Main
 
+-- Submit behavior (key check + create second GUI if correct)
 Submit.MouseButton1Click:Connect(function()
 
     local enteredKey = KeyBox.Text:match("^%s*(.-)%s*$")
@@ -207,6 +226,9 @@ Submit.MouseButton1Click:Connect(function()
         Second.Parent = ScreenGui
         Second.Active = true
         Instance.new("UICorner", Second).CornerRadius = UDim.new(0, 20)
+
+        -- aplicamos drag a la segunda ventana también
+        makeDraggable(Second)
 
         local Stroke = Instance.new("UIStroke")
         Stroke.Color = Color3.fromRGB(200, 0, 255)
