@@ -70,12 +70,18 @@ local StrokeMain = Instance.new("UIStroke")
 StrokeMain.Color = Color3.fromRGB(255,200,0)
 StrokeMain.Thickness = 5
 StrokeMain.Parent = Main
--- Imagen de fondo
+-- Imagen de fondo (tu mona china con ID correcto y fixes)
 local BackgroundImage = Instance.new("ImageLabel")
-BackgroundImage.Size = UDim2.new(1,0,1,0)
+BackgroundImage.Name = "BackgroundAnime"
+BackgroundImage.Size = UDim2.new(1, 0, 1, 0)
+BackgroundImage.Position = UDim2.new(0.5, 0, 0.5, 0)
+BackgroundImage.AnchorPoint = Vector2.new(0.5, 0.5)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.Image = "rbxassetid://122255224861955"
-BackgroundImage.ScaleType = Enum.ScaleType.Crop
+BackgroundImage.ImageTransparency = 0
+BackgroundImage.Image = "rbxassetid://96939198021601"  -- ← TU ID AQUÍ, ya puesto
+BackgroundImage.ScaleType = Enum.ScaleType.Fit  -- Fit para que no corte la cara
+BackgroundImage.ResampleMode = Enum.ResamplerMode.Default
+BackgroundImage.ZIndex = 0  -- Fondo
 BackgroundImage.Parent = Main
 -- Título
 local Title = Instance.new("TextLabel")
