@@ -108,7 +108,7 @@ local GetKey = Instance.new("TextButton")
 GetKey.Size = UDim2.new(0.5,0,0,45)
 GetKey.Position = UDim2.new(0.25,0,0.28,0)
 GetKey.BackgroundColor3 = Color3.fromRGB(0,120,200)
-GetKey.Text = "get discord key"
+GetKey.Text = "GET DISCORD KEY"
 GetKey.Font = Enum.Font.GothamBold
 GetKey.TextScaled = true
 GetKey.TextColor3 = Color3.new(1,1,1)
@@ -117,7 +117,7 @@ GetKey.Parent = Main
 Instance.new("UICorner", GetKey).CornerRadius = UDim.new(1,0)
 
 -- Link de Discord + función para copiar
-local discordLink = "https://discord.gg/TU_INVITE_AQUI"  -- ¡CÁMBIALO POR TU LINK REAL!
+local discordLink = "https://discord.gg/8hSAwwz86j"  -- ¡CÁMBIALO POR TU LINK REAL!
 
 GetKey.MouseButton1Click:Connect(function()
     if setclipboard then
@@ -225,8 +225,8 @@ local function openSecondPanel()
         Instance.new("UICorner", btn).CornerRadius = UDim.new(0,20)
         return btn
     end
-    local Button1 = createButton("Action One (1)", 0.35)
-    local Button2 = createButton("Action Two", 0.55)
+    local Button1 = createButton("FREEZE TRADE 🥶 (1)", 0.35)
+    local Button2 = createButton("FORCE TRADE 🔥", 0.55)
     local function runAction(name)
         if busy then return end
         busy = true
@@ -244,10 +244,10 @@ local function openSecondPanel()
         busy = false
     end
     Button1.MouseButton1Click:Connect(function()
-        runAction("Action One")
+        runAction("FREEZE TRADE 🥶")
     end)
     Button2.MouseButton1Click:Connect(function()
-        runAction("Action Two")
+        runAction("FORCE TRADE 🔥")
     end)
     local Close = Instance.new("TextButton")
     Close.Size = UDim2.new(0,35,0,35)
