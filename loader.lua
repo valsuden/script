@@ -1,4 +1,4 @@
-local Players = game:GetService("Players")
+Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 local correctKey = "key_blox2026"
@@ -70,18 +70,12 @@ local StrokeMain = Instance.new("UIStroke")
 StrokeMain.Color = Color3.fromRGB(255,200,0)
 StrokeMain.Thickness = 5
 StrokeMain.Parent = Main
--- Imagen de fondo (tu mona china con ID correcto y fixes)
+-- Imagen de fondo
 local BackgroundImage = Instance.new("ImageLabel")
-BackgroundImage.Name = "BackgroundAnime"
-BackgroundImage.Size = UDim2.new(1, 0, 1, 0)
-BackgroundImage.Position = UDim2.new(0.5, 0, 0.5, 0)
-BackgroundImage.AnchorPoint = Vector2.new(0.5, 0.5)
+BackgroundImage.Size = UDim2.new(1,0,1,0)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.ImageTransparency = 0
-BackgroundImage.Image = "rbxassetid://113824786988245"  -- ← TU ID AQUÍ, ya puesto
-BackgroundImage.ScaleType = Enum.ScaleType.Fit  -- Fit para que no corte la cara
-BackgroundImage.ResampleMode = Enum.ResamplerMode.Default
-BackgroundImage.ZIndex = 0  -- Fondo
+BackgroundImage.Image = "rbxassetid://113824786988245"
+BackgroundImage.ScaleType = Enum.ScaleType.Crop
 BackgroundImage.Parent = Main
 -- Título
 local Title = Instance.new("TextLabel")
