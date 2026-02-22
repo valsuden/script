@@ -74,7 +74,7 @@ StrokeMain.Parent = Main
 local BackgroundImage = Instance.new("ImageLabel")
 BackgroundImage.Size = UDim2.new(1,0,1,0)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.Image = "rbxassetid://96939198021601"
+BackgroundImage.Image = "rbxassetid://113824786988245"
 BackgroundImage.ScaleType = Enum.ScaleType.Crop
 BackgroundImage.Parent = Main
 -- Título
@@ -208,8 +208,8 @@ btn.Parent = Panel
 Instance.new("UICorner", btn).CornerRadius = UDim.new(0,20)
 return btn
 end
-local Button1 = createButton("hello (1)", 0.35)
-local Button2 = createButton("hello", 0.55)
+local Button1 = createButton("Action One (1)", 0.35)
+local Button2 = createButton("Action Two", 0.55)
 local function runAction(name)
 if busy then return end
 busy = true
