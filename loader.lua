@@ -56,11 +56,11 @@ ScreenGui.Name = "FruitSteel"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = player.PlayerGui
 -- =========================
--- VENTANA PRINCIPAL (KEY)
+-- VENTANA PRINCIPAL (KEY) - ARREGLADO TAMAÑO Y POSICIÓN
 -- =========================
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 500, 0, 330)
-Main.Position = UDim2.new(0.5, -250, 0.5, -165)
+Main.Size = UDim2.new(0, 550, 0, 380)          -- ← Más ancho y alto para que quepa mejor la imagen
+Main.Position = UDim2.new(0.5, -275, 0.5, -190) -- ← Centrado perfecto con nuevo tamaño
 Main.BackgroundColor3 = Color3.fromRGB(40, 0, 60)
 Main.Parent = ScreenGui
 Main.Active = true
@@ -70,12 +70,13 @@ local StrokeMain = Instance.new("UIStroke")
 StrokeMain.Color = Color3.fromRGB(255,200,0)
 StrokeMain.Thickness = 5
 StrokeMain.Parent = Main
--- Imagen de fondo
+-- Imagen de fondo - ARREGLADO BORROSO
 local BackgroundImage = Instance.new("ImageLabel")
 BackgroundImage.Size = UDim2.new(1,0,1,0)
 BackgroundImage.BackgroundTransparency = 1
 BackgroundImage.Image = "rbxassetid://96939198021601"
-BackgroundImage.ScaleType = Enum.ScaleType.Crop
+BackgroundImage.ScaleType = Enum.ScaleType.Fit  -- ← Fit: ajusta completa sin cortar ni borroso
+BackgroundImage.ResampleMode = Enum.ResamplerMode.Default  -- ← Nitidez para anime
 BackgroundImage.Parent = Main
 -- Título
 local Title = Instance.new("TextLabel")
@@ -115,10 +116,8 @@ GetKey.TextColor3 = Color3.new(1,1,1)
 GetKey.ZIndex = 2
 GetKey.Parent = Main
 Instance.new("UICorner", GetKey).CornerRadius = UDim.new(1,0)
-
 -- Link de Discord + función para copiar
-local discordLink = "https://discord.gg/8hSAwwz86j"  -- ¡CÁMBIALO POR TU LINK REAL!
-
+local discordLink = "https://discord.gg/8hSAwwz86j"
 GetKey.MouseButton1Click:Connect(function()
     if setclipboard then
         setclipboard(discordLink)
@@ -131,7 +130,6 @@ GetKey.MouseButton1Click:Connect(function()
     task.wait(5)
     Result.Text = ""
 end)
-
 -- TextBox
 local KeyBox = Instance.new("TextBox")
 KeyBox.Size = UDim2.new(0.7,0,0,50)
