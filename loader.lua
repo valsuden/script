@@ -74,7 +74,7 @@ StrokeMain.Parent = Main
 local BackgroundImage = Instance.new("ImageLabel")
 BackgroundImage.Size = UDim2.new(1,0,1,0)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.Image = "rbxassetid://113824786988245"
+BackgroundImage.Image = "rbxassetid://96939198021601"
 BackgroundImage.ScaleType = Enum.ScaleType.Crop
 BackgroundImage.Parent = Main
 -- Título
@@ -89,7 +89,7 @@ Title.TextColor3 = Color3.fromRGB(0,170,255)
 Title.ZIndex = 2
 Title.Parent = Main
 -- Botón X
-local CloseMain = Instance.new("TextButton")
+local CloseMain = Instance.new("")
 CloseMain.Size = UDim2.new(0,40,0,40)
 CloseMain.Position = UDim2.new(1,-50,0,10)
 CloseMain.Text = "X"
@@ -104,7 +104,7 @@ CloseMain.MouseButton1Click:Connect(function()
 Main.Visible = false
 end)
 -- Botón Obtener llave
-local GetKey = Instance.new("TextButton")
+local GetKey = Instance.new("")
 GetKey.Size = UDim2.new(0.5,0,0,45)
 GetKey.Position = UDim2.new(0.25,0,0.28,0)
 GetKey.BackgroundColor3 = Color3.fromRGB(0,120,200)
@@ -150,7 +150,7 @@ Result.TextScaled = true
 Result.ZIndex = 2
 Result.Parent = Main
 -- Footer
-local Footer = Instance.new("TextLabel")
+local Footer = Instance.new("")
 Footer.Size = UDim2.new(1,0,0,30)
 Footer.Position = UDim2.new(0,0,1,-35)
 Footer.BackgroundTransparency = 1
@@ -177,7 +177,7 @@ local Stroke = Instance.new("UIStroke")
 Stroke.Color = Color3.fromRGB(220,0,255)
 Stroke.Thickness = 5
 Stroke.Parent = Panel
-local Title2 = Instance.new("TextLabel")
+local Title2 = Instance.new("")
 Title2.Size = UDim2.new(1,0,0,70)
 Title2.BackgroundTransparency = 1
 Title2.Text = "FRUIT STEEL PANEL"
@@ -185,7 +185,7 @@ Title2.Font = Enum.Font.GothamBlack
 Title2.TextScaled = true
 Title2.TextColor3 = Color3.fromRGB(255,170,255)
 Title2.Parent = Panel
-local Status = Instance.new("TextLabel")
+local Status = Instance.new("")
 Status.Size = UDim2.new(1,0,0,40)
 Status.Position = UDim2.new(0,0,1,-50)
 Status.BackgroundTransparency = 1
@@ -208,8 +208,8 @@ btn.Parent = Panel
 Instance.new("UICorner", btn).CornerRadius = UDim.new(0,20)
 return btn
 end
-local Button1 = createButton("Action One (1)", 0.35)
-local Button2 = createButton("Action Two", 0.55)
+local Button1 = createButton("freeze trade 🥶 (1)", 0.35)
+local Button2 = createButton("force trade🔥", 0.55)
 local function runAction(name)
 if busy then return end
 busy = true
