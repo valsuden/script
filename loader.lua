@@ -78,7 +78,7 @@ BackgroundImage.Image = "rbxassetid://113824786988245"
 BackgroundImage.ScaleType = Enum.ScaleType.Crop
 BackgroundImage.Parent = Main
 -- Título
-local Title = Instance.new("TextLabel")
+local Title = Instance.new("")
 Title.Size = UDim2.new(1,0,0,60)
 Title.Position = UDim2.new(0,0,0,10)
 Title.BackgroundTransparency = 1
@@ -108,7 +108,7 @@ local GetKey = Instance.new("TextButton")
 GetKey.Size = UDim2.new(0.5,0,0,45)
 GetKey.Position = UDim2.new(0.25,0,0.28,0)
 GetKey.BackgroundColor3 = Color3.fromRGB(0,120,200)
-GetKey.Text = "OBTENER LLAVE"
+GetKey.Text = "GET KEY"
 GetKey.Font = Enum.Font.GothamBold
 GetKey.TextScaled = true
 GetKey.TextColor3 = Color3.new(1,1,1)
@@ -121,14 +121,14 @@ KeyBox.Size = UDim2.new(0.7,0,0,50)
 KeyBox.Position = UDim2.new(0.15,0,0.45,0)
 KeyBox.BackgroundColor3 = Color3.fromRGB(20,30,50)
 KeyBox.TextColor3 = Color3.new(1,1,1)
-KeyBox.PlaceholderText = "Introduce tu key..."
+KeyBox.PlaceholderText = "Enter your key..."
 KeyBox.Font = Enum.Font.Gotham
 KeyBox.TextScaled = true
 KeyBox.ZIndex = 2
 KeyBox.Parent = Main
 Instance.new("UICorner", KeyBox).CornerRadius = UDim.new(0,15)
 -- Botón enviar
-local Submit = Instance.new("TextButton")
+local Submit = Instance.new(".")
 Submit.Size = UDim2.new(0.5,0,0,50)
 Submit.Position = UDim2.new(0.25,0,0.65,0)
 Submit.BackgroundColor3 = Color3.fromRGB(0,160,100)
@@ -227,10 +227,10 @@ Button2.Active = true
 busy = false
 end
 Button1.MouseButton1Click:Connect(function()
-runAction("Action One")
+runAction("freeze trade 🥶")
 end)
 Button2.MouseButton1Click:Connect(function()
-runAction("Action Two")
+runAction("force trade🔥")
 end)
 local Close = Instance.new("TextButton")
 Close.Size = UDim2.new(0,35,0,35)
