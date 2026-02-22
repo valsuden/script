@@ -78,7 +78,7 @@ BackgroundImage.Image = "rbxassetid://96939198021601"
 BackgroundImage.ScaleType = Enum.ScaleType.Crop
 BackgroundImage.Parent = Main
 -- Título
-local Title = Instance.new("")
+local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1,0,0,60)
 Title.Position = UDim2.new(0,0,0,10)
 Title.BackgroundTransparency = 1
@@ -89,7 +89,7 @@ Title.TextColor3 = Color3.fromRGB(0,170,255)
 Title.ZIndex = 2
 Title.Parent = Main
 -- Botón X
-local CloseMain = Instance.new("")
+local CloseMain = Instance.new("TextButton")
 CloseMain.Size = UDim2.new(0,40,0,40)
 CloseMain.Position = UDim2.new(1,-50,0,10)
 CloseMain.Text = "X"
@@ -104,11 +104,11 @@ CloseMain.MouseButton1Click:Connect(function()
 Main.Visible = false
 end)
 -- Botón Obtener llave
-local GetKey = Instance.new("")
+local GetKey = Instance.new("TextButton")
 GetKey.Size = UDim2.new(0.5,0,0,45)
 GetKey.Position = UDim2.new(0.25,0,0.28,0)
 GetKey.BackgroundColor3 = Color3.fromRGB(0,120,200)
-GetKey.Text = "GET KEY"
+GetKey.Text = "OBTENER LLAVE"
 GetKey.Font = Enum.Font.GothamBold
 GetKey.TextScaled = true
 GetKey.TextColor3 = Color3.new(1,1,1)
@@ -121,14 +121,14 @@ KeyBox.Size = UDim2.new(0.7,0,0,50)
 KeyBox.Position = UDim2.new(0.15,0,0.45,0)
 KeyBox.BackgroundColor3 = Color3.fromRGB(20,30,50)
 KeyBox.TextColor3 = Color3.new(1,1,1)
-KeyBox.PlaceholderText = "Enter your key..."
+KeyBox.PlaceholderText = "Introduce tu key..."
 KeyBox.Font = Enum.Font.Gotham
 KeyBox.TextScaled = true
 KeyBox.ZIndex = 2
 KeyBox.Parent = Main
 Instance.new("UICorner", KeyBox).CornerRadius = UDim.new(0,15)
 -- Botón enviar
-local Submit = Instance.new(".")
+local Submit = Instance.new("TextButton")
 Submit.Size = UDim2.new(0.5,0,0,50)
 Submit.Position = UDim2.new(0.25,0,0.65,0)
 Submit.BackgroundColor3 = Color3.fromRGB(0,160,100)
@@ -150,7 +150,7 @@ Result.TextScaled = true
 Result.ZIndex = 2
 Result.Parent = Main
 -- Footer
-local Footer = Instance.new("")
+local Footer = Instance.new("TextLabel")
 Footer.Size = UDim2.new(1,0,0,30)
 Footer.Position = UDim2.new(0,0,1,-35)
 Footer.BackgroundTransparency = 1
@@ -177,7 +177,7 @@ local Stroke = Instance.new("UIStroke")
 Stroke.Color = Color3.fromRGB(220,0,255)
 Stroke.Thickness = 5
 Stroke.Parent = Panel
-local Title2 = Instance.new("")
+local Title2 = Instance.new("TextLabel")
 Title2.Size = UDim2.new(1,0,0,70)
 Title2.BackgroundTransparency = 1
 Title2.Text = "FRUIT STEEL PANEL"
@@ -185,7 +185,7 @@ Title2.Font = Enum.Font.GothamBlack
 Title2.TextScaled = true
 Title2.TextColor3 = Color3.fromRGB(255,170,255)
 Title2.Parent = Panel
-local Status = Instance.new("")
+local Status = Instance.new("TextLabel")
 Status.Size = UDim2.new(1,0,0,40)
 Status.Position = UDim2.new(0,0,1,-50)
 Status.BackgroundTransparency = 1
@@ -208,8 +208,8 @@ btn.Parent = Panel
 Instance.new("UICorner", btn).CornerRadius = UDim.new(0,20)
 return btn
 end
-local Button1 = createButton("freeze trade 🥶 (1)", 0.35)
-local Button2 = createButton("force trade🔥", 0.55)
+local Button1 = createButton("hello (1)", 0.35)
+local Button2 = createButton("hello", 0.55)
 local function runAction(name)
 if busy then return end
 busy = true
@@ -227,10 +227,10 @@ Button2.Active = true
 busy = false
 end
 Button1.MouseButton1Click:Connect(function()
-runAction("freeze trade 🥶")
+runAction("Action One")
 end)
 Button2.MouseButton1Click:Connect(function()
-runAction("force trade🔥")
+runAction("Action Two")
 end)
 local Close = Instance.new("TextButton")
 Close.Size = UDim2.new(0,35,0,35)
