@@ -70,17 +70,12 @@ local StrokeMain = Instance.new("UIStroke")
 StrokeMain.Color = Color3.fromRGB(255,200,0)
 StrokeMain.Thickness = 5
 StrokeMain.Parent = Main
--- Imagen de fondo (mona china 2 - ID 113824786988245, formato que carga bien)
+-- Imagen de fondo
 local BackgroundImage = Instance.new("ImageLabel")
-BackgroundImage.Name = "MonaChinaBackground"
-BackgroundImage.Size = UDim2.new(1, 0, 1, 0)
-BackgroundImage.Position = UDim2.new(0.5, 0, 0.5, 0)
-BackgroundImage.AnchorPoint = Vector2.new(0.5, 0.5)
+BackgroundImage.Size = UDim2.new(1,0,1,0)
 BackgroundImage.BackgroundTransparency = 1
-BackgroundImage.ImageTransparency = 0
-BackgroundImage.Image = "http://www.roblox.com/asset/?id=113824786988245"  -- Formato que carga el Decal
-BackgroundImage.ScaleType = Enum.ScaleType.Fit  -- Se ve completa y centrada
-BackgroundImage.ZIndex = 0  -- Fondo
+BackgroundImage.Image = "rbxassetid://96939198021601"
+BackgroundImage.ScaleType = Enum.ScaleType.Crop
 BackgroundImage.Parent = Main
 -- Título
 local Title = Instance.new("TextLabel")
