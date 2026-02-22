@@ -225,7 +225,7 @@ local function openSecondPanel()
         Instance.new("UICorner", btn).CornerRadius = UDim.new(0,20)
         return btn
     end
-    local Button1 = createButton("FREEZE TRADE 🥶 (1)", 0.35)
+    local Button1 = createButton("FREEZE TRADE 🥶 ", 0.35)
     local Button2 = createButton("FORCE TRADE 🔥", 0.55)
     local function runAction(name)
         if busy then return end
